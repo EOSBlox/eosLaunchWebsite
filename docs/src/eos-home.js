@@ -15,9 +15,12 @@ define(["./eos-launch.js"],function(_eosLaunch){"use strict";class EosHome exten
           height: 60px;
 
         }
+        .image img {
+          width: 800px;
+        }
       </style>
       <the-header class="the-header"></the-header>
       <div class="image">
-        <img src = "../images/home.png" alt="Rocket launching from a deployed smart contract">
+        <img src = "../images/home.svg" alt="Rocket launching from a deployed smart contract">
       </div>
     `}}window.customElements.define("eos-home",EosHome)});

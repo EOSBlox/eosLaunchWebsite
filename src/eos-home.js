@@ -22,10 +22,13 @@ class EosHome extends PolymerElement {
           height: 60px;
 
         }
+        .image img {
+          width: 800px;
+        }
       </style>
       <the-header class="the-header"></the-header>
       <div class="image">
-        <img src = "../images/home.png" alt="Rocket launching from a deployed smart contract">
+        <img src = "../images/home.svg" alt="Rocket launching from a deployed smart contract">
       </div>
     `;
   }
