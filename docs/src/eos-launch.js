@@ -15,27 +15,7 @@ define(["exports","meta","require"],function(_exports,meta,_require){"use strict
     </style>
 
     <slot></slot>
-`,is:"iron-pages",behaviors:[IronResizableBehavior,IronSelectableBehavior],properties:{activateEvent:{type:String,value:null}},observers:["_selectedPageChanged(selected)"],_selectedPageChanged:function(){this.async(this.notifyResize)}});setPassiveTouchGestures(!0);setRootPath(MyAppGlobals.rootPath);class EosLaunch extends PolymerElement{static get template(){return html`
-      <style>
-        :host {
-          display: block;
-        }
-      </style>
-
-      <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
-      </app-location>
-
-      <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}">
-      </app-route>
-
-      <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
-        <eos-home name="home"></eos-home>  
-        <eos-create name="create"></eos-create>
-        <eos-deploy name="deploy"></eos-deploy>
-        <eos-call name="call"></eos-call>
-        <my-view404 name="view404"></my-view404>
-      </iron-pages>
-    `}static get properties(){return{page:{type:String,reflectToAttribute:!0,observer:"_pageChanged"},routeData:Object,subroute:Object}}static get observers(){return["_routePageChanged(routeData.page)"]}_routePageChanged(page){if(!page){this.page="home"}else if(-1!==["home","create","deploy","call"].indexOf(page)){this.page=page}else{this.page="view404"}}_pageChanged(page){switch(page){case"home":new Promise((res,rej)=>_require.default(["./eos-home.js"],res,rej)).then(bundle=>bundle&&bundle.$eosHome||{});break;case"create":new Promise((res,rej)=>_require.default(["./eos-create.js"],res,rej)).then(bundle=>bundle&&bundle.$eosCreate||{});break;case"deploy":new Promise((res,rej)=>_require.default(["./eos-deploy.js"],res,rej)).then(bundle=>bundle&&bundle.$eosDeploy||{});break;case"call":new Promise((res,rej)=>_require.default(["./eos-call.js"],res,rej)).then(bundle=>bundle&&bundle.$eosCall||{});break;case"view404":new Promise((res,rej)=>_require.default(["./my-view404.js"],res,rej)).then(bundle=>bundle&&bundle.$myView404||{});break;}}}window.customElements.define("eos-launch",EosLaunch);const $_documentContainer=document.createElement("template");$_documentContainer.innerHTML=`<dom-module id="shared-styles">
+`,is:"iron-pages",behaviors:[IronResizableBehavior,IronSelectableBehavior],properties:{activateEvent:{type:String,value:null}},observers:["_selectedPageChanged(selected)"],_selectedPageChanged:function(){this.async(this.notifyResize)}});const $_documentContainer=document.createElement("template");$_documentContainer.innerHTML=`<dom-module id="shared-styles">
   <template>
     <style>
       .card {
@@ -66,4 +46,95 @@ define(["exports","meta","require"],function(_exports,meta,_require){"use strict
       }
     </style>
   </template>
-</dom-module>`;document.head.appendChild($_documentContainer.content)});
+</dom-module>`;document.head.appendChild($_documentContainer.content);class TheHeader extends PolymerElement{static get template(){return html`
+    <style include="shared-styles">
+        :host {
+            display: block;
+            color: #FFFFFF;
+        }
+        h1, a{
+          color: #FFFFFF;
+          text-decoration: none;
+          margin: 0;
+          font-weight: 200;
+        }
+        h1 span {
+          font-weight: 800;
+        }
+        .header {
+          padding: 36px;
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+        }
+        .extended{
+          padding: 36px;
+        }
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+        }
+        li {
+          display: inline;
+          margin-left: 20px;
+          font-size: 13px;
+          color: #FFFFFF;
+          font-weight: 800;
+        }
+        .title {
+          font-size: 36px;
+          font-weight: 600;
+        }
+        .sub-title {
+          font-size: 16px;
+        }
+        .center{
+          max-width: 1160px;
+          margin: 0 auto;
+        }
+
+    </style>
+
+    <div class="header" style="background-color: #{{color}}">
+      <div class="logo">
+        <a href="/">
+          <h1>EOS <span>Launch</span></h1>
+        </a>
+      </div>
+      <div class="links">
+        <ul id="menu">              
+          <li><a href="/create">Create Account</a></li>
+          <li><a href="/deploy">Deploy Contract</a></li>
+          <li><a href="/call">Call Contract</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="extended" style="background-color: #{{color}}">
+      <div class="center">
+        <div class="title">{{title}}</div>
+        <div class="sub-title">{{subTitle}}</div>
+        <div style="height:50px"></div>
+      </div>
+    </div>
+    `}static get properties(){return{color:{type:String},title:{type:String},subTitle:{type:String}}}}window.customElements.define("the-header",TheHeader);setPassiveTouchGestures(!0);setRootPath(MyAppGlobals.rootPath);class EosLaunch extends PolymerElement{static get template(){return html`
+      <style>
+        :host {
+          display: block;
+        }
+      </style>
+
+      <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
+      </app-location>
+
+      <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}">
+      </app-route>
+
+      <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
+        <eos-home name="home"></eos-home>  
+        <eos-create name="create"></eos-create>
+        <eos-deploy name="deploy"></eos-deploy>
+        <eos-call name="call"></eos-call>
+        <my-view404 name="view404"></my-view404>
+      </iron-pages>
+    `}static get properties(){return{page:{type:String,reflectToAttribute:!0,observer:"_pageChanged"},routeData:Object,subroute:Object}}static get observers(){return["_routePageChanged(routeData.page)"]}_routePageChanged(page){if(!page){this.page="home"}else if(-1!==["home","create","deploy","call"].indexOf(page)){this.page=page}else{this.page="view404"}}_pageChanged(page){switch(page){case"home":new Promise((res,rej)=>_require.default(["./eos-home.js"],res,rej)).then(bundle=>bundle&&bundle.$eosHome||{});break;case"create":new Promise((res,rej)=>_require.default(["./eos-create.js"],res,rej)).then(bundle=>bundle&&bundle.$eosCreate||{});break;case"deploy":new Promise((res,rej)=>_require.default(["./eos-deploy.js"],res,rej)).then(bundle=>bundle&&bundle.$eosDeploy||{});break;case"call":new Promise((res,rej)=>_require.default(["./eos-call.js"],res,rej)).then(bundle=>bundle&&bundle.$eosCall||{});break;case"view404":new Promise((res,rej)=>_require.default(["./my-view404.js"],res,rej)).then(bundle=>bundle&&bundle.$myView404||{});break;}}}window.customElements.define("eos-launch",EosLaunch)});

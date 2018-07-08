@@ -1,5 +1,6 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import './shared-styles.js';
+import './components/the-header.js';
 
 class EosCreate extends PolymerElement {
   static get template() {
@@ -7,16 +8,18 @@ class EosCreate extends PolymerElement {
       <style include="shared-styles">
         :host {
           display: block;
-
-          padding: 10px;
+          padding: 0px;
         }
       </style>
+      
+      <the-header 
+        class="the-header" 
+        color="FAAF40" 
+        title="Create Account" 
+        sub-title="Create an account for yourself or for a contract">
+      </the-header>
 
-      <div class="card">
-        <div class="circle">1</div>
-        <h1>View One</h1>
-        <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-        <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+      <div class="top-color">
       </div>
     `;
   }
