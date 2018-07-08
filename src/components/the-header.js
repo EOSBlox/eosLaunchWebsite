@@ -1,13 +1,18 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
-import '../shared-styles.js';
+
 
 class TheHeader extends PolymerElement {
   static get template() {
     return html`
-    <style include="shared-styles">
+    <style>
         :host {
             display: block;
             color: #FFFFFF;
+        }
+        h1 {
+        margin: 16px 0;
+        color: #212121;
+        font-size: 22px;
         }
         h1, a{
           color: #FFFFFF;

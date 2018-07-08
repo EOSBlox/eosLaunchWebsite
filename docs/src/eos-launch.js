@@ -15,42 +15,16 @@ define(["exports","meta","require"],function(_exports,meta,_require){"use strict
     </style>
 
     <slot></slot>
-`,is:"iron-pages",behaviors:[IronResizableBehavior,IronSelectableBehavior],properties:{activateEvent:{type:String,value:null}},observers:["_selectedPageChanged(selected)"],_selectedPageChanged:function(){this.async(this.notifyResize)}});const $_documentContainer=document.createElement("template");$_documentContainer.innerHTML=`<dom-module id="shared-styles">
-  <template>
+`,is:"iron-pages",behaviors:[IronResizableBehavior,IronSelectableBehavior],properties:{activateEvent:{type:String,value:null}},observers:["_selectedPageChanged(selected)"],_selectedPageChanged:function(){this.async(this.notifyResize)}});class TheHeader extends PolymerElement{static get template(){return html`
     <style>
-      .card {
-        margin: 24px;
-        padding: 16px;
-        color: #757575;
-        border-radius: 5px;
-        background-color: #fff;
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-      }
-
-      .circle {
-        display: inline-block;
-        width: 64px;
-        height: 64px;
-        text-align: center;
-        color: #555;
-        border-radius: 50%;
-        background: #ddd;
-        font-size: 30px;
-        line-height: 64px;
-      }
-
-      h1 {
-        margin: 16px 0;
-        color: #212121;
-        font-size: 22px;
-      }
-    </style>
-  </template>
-</dom-module>`;document.head.appendChild($_documentContainer.content);class TheHeader extends PolymerElement{static get template(){return html`
-    <style include="shared-styles">
         :host {
             display: block;
             color: #FFFFFF;
+        }
+        h1 {
+        margin: 16px 0;
+        color: #212121;
+        font-size: 22px;
         }
         h1, a{
           color: #FFFFFF;
@@ -137,4 +111,125 @@ define(["exports","meta","require"],function(_exports,meta,_require){"use strict
         <eos-call name="call"></eos-call>
         <my-view404 name="view404"></my-view404>
       </iron-pages>
-    `}static get properties(){return{page:{type:String,reflectToAttribute:!0,observer:"_pageChanged"},routeData:Object,subroute:Object}}static get observers(){return["_routePageChanged(routeData.page)"]}_routePageChanged(page){if(!page){this.page="home"}else if(-1!==["home","create","deploy","call"].indexOf(page)){this.page=page}else{this.page="view404"}}_pageChanged(page){switch(page){case"home":new Promise((res,rej)=>_require.default(["./eos-home.js"],res,rej)).then(bundle=>bundle&&bundle.$eosHome||{});break;case"create":new Promise((res,rej)=>_require.default(["./eos-create.js"],res,rej)).then(bundle=>bundle&&bundle.$eosCreate||{});break;case"deploy":new Promise((res,rej)=>_require.default(["./eos-deploy.js"],res,rej)).then(bundle=>bundle&&bundle.$eosDeploy||{});break;case"call":new Promise((res,rej)=>_require.default(["./eos-call.js"],res,rej)).then(bundle=>bundle&&bundle.$eosCall||{});break;case"view404":new Promise((res,rej)=>_require.default(["./my-view404.js"],res,rej)).then(bundle=>bundle&&bundle.$myView404||{});break;}}}window.customElements.define("eos-launch",EosLaunch)});
+    `}static get properties(){return{page:{type:String,reflectToAttribute:!0,observer:"_pageChanged"},routeData:Object,subroute:Object}}static get observers(){return["_routePageChanged(routeData.page)"]}_routePageChanged(page){if(!page){this.page="home"}else if(-1!==["home","create","deploy","call"].indexOf(page)){this.page=page}else{this.page="view404"}}_pageChanged(page){switch(page){case"home":new Promise((res,rej)=>_require.default(["./eos-home.js"],res,rej)).then(bundle=>bundle&&bundle.$eosHome||{});break;case"create":new Promise((res,rej)=>_require.default(["./eos-create.js"],res,rej)).then(bundle=>bundle&&bundle.$eosCreate||{});break;case"deploy":new Promise((res,rej)=>_require.default(["./eos-deploy.js"],res,rej)).then(bundle=>bundle&&bundle.$eosDeploy||{});break;case"call":new Promise((res,rej)=>_require.default(["./eos-call.js"],res,rej)).then(bundle=>bundle&&bundle.$eosCall||{});break;case"view404":new Promise((res,rej)=>_require.default(["./my-view404.js"],res,rej)).then(bundle=>bundle&&bundle.$myView404||{});break;}}}window.customElements.define("eos-launch",EosLaunch);const $_documentContainer=document.createElement("template");$_documentContainer.innerHTML=`<dom-module id="shared-styles">
+  <template>
+    <style>
+
+      .center {
+        max-width: 1160px;
+        margin: 0 auto;
+        display: flex;
+      }
+      .right {
+        width: 300px;
+      }
+      .left {
+        flex:1;
+      }
+      .side-cell{
+        background-color: white;
+        border: 1px solid #DADBDF;
+        box-shadow: rgba(208, 209, 213, 0.5) 0px 1px 0px 0px, rgba(220, 221, 224, 0.4) 0px 0px 0px 1px;
+        border-radius: 4px;
+        margin: 20px 0 0 20px;
+      }
+      .main-cell{
+        background-color: white;
+        border: 1px solid #DADBDF;
+        box-shadow: rgba(208, 209, 213, 0.5) 0px 1px 0px 0px, rgba(220, 221, 224, 0.4) 0px 0px 0px 1px;
+        border-radius: 4px;
+        margin: 20px 0 0 0;
+      }
+
+      .title{
+        padding:15px;
+        border-bottom: 1px solid #DCDDE0;
+        font-size: 13px;
+        font-weight: 700;
+        color: #3A3E45;
+        text-transform: uppercase;
+      }
+      .body{
+        color: #3A3E45;
+        padding:15px;
+        font-size: 13px;
+        font-weight: 400;
+      }
+      .cell{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 7px;
+      }
+      .name{
+        flex: 1;
+        font-size: 17px;
+        line-height: 40px;
+      }
+      .input{
+        flex: 2;
+      }
+      input {
+        width: 100%;
+        outline: none;
+        height: 40px;
+        border-radius: 2px;
+        background: #F0F1F3;
+        border: 1px solid #C9CCD0;
+        border-radius: 4px;
+        text-indent: 15px;
+        font-size: 15px;
+      }
+      input:focus { 
+        background-color: white;
+      }
+      .button{
+        background-image: linear-gradient(-180deg, #FEFFFF 0%, #F3F4F5 100%);
+        border: 1px solid #D2D3D5;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.21);
+        border-radius: 4px;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-size: 13px;
+        color: #585D6B;
+        font-weight:600;
+      }
+      .main-cell .body:first-child { 
+        padding-top:40px;
+      }
+      .main-cell .body:last-child { 
+        padding-bottom:100px;
+      }
+      .spacer {
+        width: 100%;
+        height: 40px;
+      }
+      .yellow-button {
+        background-image: linear-gradient(-179deg, #FFCB7E 0%, #FAAF40 98%);
+        border: 1px solid #B37D2D;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.21);
+        border-radius: 4px;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-size: 15px;
+        color: #FFF;
+        font-weight:800;
+        height:55px;
+        text-shadow: 0 1px 1px rgba(0,0,0,0.30);
+      }
+
+      .green-button {
+        background-image: linear-gradient(-180deg, #80BA68 2%, #73A55E 100%);
+        border: 1px solid #4A6C3C;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.21);
+        border-radius: 4px;
+        cursor: pointer;
+        text-transform: uppercase;
+        font-size: 15px;
+        color: #FFF;
+        font-weight:800;
+        height:55px;
+        text-shadow: 0 1px 1px rgba(0,0,0,0.30);
+      }
+    </style>
+  </template>
+</dom-module>`;document.head.appendChild($_documentContainer.content)});
