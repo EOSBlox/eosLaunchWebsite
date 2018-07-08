@@ -208,8 +208,8 @@ define(["./eos-launch.js"],function(_eosLaunch){"use strict";var _Mathabs=Math.a
         <div class="right">
 
           <div class="side-cell">
-            <div class="title">Help</div>
-            <div class="body">You need to choose a 12 charector 'Account Name', you can then enter or generage Active and Owner Key Pairs. Lastly you will need enter the name and private key for the acocunt that will find the new account. </div>
+            <div class="title">Account Name</div>
+            <div class="body">You need to choose a 12 charector 'Account Name', you can then enter or generate Active and Owner Key Pairs. Lastly you will need enter the name and private key for the acocunt that will find the new account. </div>
           </div>
           <div class="side-cell">
             <div class="title">Keys</div>
@@ -217,7 +217,7 @@ define(["./eos-launch.js"],function(_eosLaunch){"use strict";var _Mathabs=Math.a
           </div>
           <div class="side-cell">
             <div class="title">Security</div>
-            <div class="body">This site does not send your private keys over the internet, not does it store your keys locally, it is 100% your responsibility to look after your keys. </div>
+            <div class="body">This site does not send your private keys over the internet, nor does it store your keys locally, it is 100% your responsibility to look after your own keys. </div>
           </div>
           <div class="side-cell">
             <div class="title">Funding</div>

@@ -56,7 +56,7 @@ define(["./eos-launch.js"],function(_eosLaunch){"use strict";class EosDeploy ext
 
           <div class="side-cell">
             <div class="title">Security</div>
-            <div class="body">This site does not send your private keys over the internet, not does it store your keys locally, it is 100% your responsibility to look after your keys. </div>
+            <div class="body">This site does not send your private keys over the internet, nor does it store your keys locally, it is 100% your responsibility to look after your own keys. </div>
           </div>
           <div class="side-cell">
             <div class="title">Funding</div>

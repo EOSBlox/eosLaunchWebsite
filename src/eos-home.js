@@ -23,7 +23,7 @@ class EosHome extends PolymerElement {
 
         }
         .image img {
-          width: 800px;
+          width: 750px;
         }
       </style>
       <the-header class="the-header"></the-header>

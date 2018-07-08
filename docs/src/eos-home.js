@@ -16,7 +16,7 @@ define(["./eos-launch.js"],function(_eosLaunch){"use strict";class EosHome exten
 
         }
         .image img {
-          width: 800px;
+          width: 750px;
         }
       </style>
       <the-header class="the-header"></the-header>
