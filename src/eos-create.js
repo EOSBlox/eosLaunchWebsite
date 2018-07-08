@@ -2,6 +2,7 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import './shared-styles.js';
 import './components/the-header.js';
 import 'blox-keypair';
+import 'blox-paper';
 
 class EosCreate extends PolymerElement {
   static get template() {
@@ -14,6 +15,7 @@ class EosCreate extends PolymerElement {
       </style>
 
       <blox-keypair id="keypair"></blox-keypair>
+      <blox-paper id="paper"></blox-paper>
 
       <the-header 
         class="the-header" 
@@ -60,7 +62,7 @@ class EosCreate extends PolymerElement {
               </div>
               <div class="cell">
                 <div class="name"></div>
-                <div class="input"><input type="submit" class="button" value="Print Paper Wallet"></div>
+                <div class="input"><input type="submit" class="button" value="Print Paper Wallet" on-click="_printKeyPairs"></div>
               </div>
               <div class="spacer"></div>
               <div class="cell">
@@ -128,7 +130,11 @@ class EosCreate extends PolymerElement {
   }
 
   _printKeyPairs(){
-
+    const publicKey1 = this.shadowRoot.querySelector('#activePublic').value 
+    const privateKey1 = this.shadowRoot.querySelector('#activePrivate').value
+    const publicKey2 = this.shadowRoot.querySelector('#ownerPublic').value
+    const privateKey2 = this.shadowRoot.querySelector('#ownerPrivate').value
+    this.$.paper.makeTwo(publicKey1, privateKey1, publicKey2, privateKey2)
   }
 
   static get properties() {

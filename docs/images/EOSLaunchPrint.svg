@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="132px" height="18px" viewBox="0 0 132 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>EOS Launch</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-family="HelveticaNeue, Helvetica Neue" font-size="23" font-weight="normal">
+        <g id="Desktop-HD" transform="translate(-21.000000, -35.000000)">
+            <text id="EOS-Launch">
+                <tspan x="20" y="52" fill="#000000">EOS</tspan>
+                <tspan x="66.437" y="52" fill="#FFFFFF"> </tspan>
+                <tspan x="72.831" y="52" font-family="HelveticaNeue-Bold, Helvetica Neue" font-weight="bold" fill="#000000">Launch</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
