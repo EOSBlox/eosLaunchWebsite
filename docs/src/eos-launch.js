@@ -185,13 +185,16 @@ define(["exports","meta","require"],function(_exports,meta,_require){"use strict
       .button{
         background-image: linear-gradient(-180deg, #FEFFFF 0%, #F3F4F5 100%);
         border: 1px solid #D2D3D5;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.21);
+        
         border-radius: 4px;
         cursor: pointer;
         text-transform: uppercase;
         font-size: 13px;
         color: #585D6B;
         font-weight:600;
+      }
+      .button:hover{
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.21);
       }
       .main-cell .body:first-child { 
         padding-top:40px;
@@ -206,7 +209,6 @@ define(["exports","meta","require"],function(_exports,meta,_require){"use strict
       .yellow-button {
         background-image: linear-gradient(-179deg, #FFCB7E 0%, #FAAF40 98%);
         border: 1px solid #B37D2D;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.21);
         border-radius: 4px;
         cursor: pointer;
         text-transform: uppercase;
@@ -214,13 +216,16 @@ define(["exports","meta","require"],function(_exports,meta,_require){"use strict
         color: #FFF;
         font-weight:800;
         height:55px;
+        
+      }
+      .yellow-button:hover {
         text-shadow: 0 1px 1px rgba(0,0,0,0.30);
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.21);
       }
 
       .green-button {
         background-image: linear-gradient(-180deg, #80BA68 2%, #73A55E 100%);
         border: 1px solid #4A6C3C;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.21);
         border-radius: 4px;
         cursor: pointer;
         text-transform: uppercase;
@@ -228,7 +233,11 @@ define(["exports","meta","require"],function(_exports,meta,_require){"use strict
         color: #FFF;
         font-weight:800;
         height:55px;
+        
+      }
+      .green-button:hover {
         text-shadow: 0 1px 1px rgba(0,0,0,0.30);
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.21);
       }
     </style>
   </template>

@@ -3,6 +3,8 @@ import './shared-styles.js';
 import './components/the-header.js';
 import 'blox-keypair';
 import 'blox-paper';
+import 'blox-connect';
+import 'blox-account';
 
 class EosCreate extends PolymerElement {
   static get template() {
@@ -16,6 +18,7 @@ class EosCreate extends PolymerElement {
 
       <blox-keypair id="keypair"></blox-keypair>
       <blox-paper id="paper"></blox-paper>
+      <blox-account id="account"></blox-account>
 
       <the-header 
         class="the-header" 
@@ -31,7 +34,7 @@ class EosCreate extends PolymerElement {
 
             <div class="cell">
               <div class="name">New Account Name</div>
-              <div class="input"><input type="text" name="name" id="name"></div>
+              <div class="input"><input type="text" name="name" id="newName"></div>
             </div>
             <div class="cell">
               <div class="name"></div>
@@ -67,18 +70,22 @@ class EosCreate extends PolymerElement {
               <div class="spacer"></div>
               <div class="cell">
                 <div class="name">Funding Account Name</div>
-                <div class="input"><input type="text" name="fname"></div>
+                <div class="input"><input type="text" name="fundingName" id="fundingName"></div>
               </div>
               <div class="cell">
-                <div class="name">Funding Private Key</div>
-                <div class="input"><input type="text" name="fname"></div>
+                <div class="name">Key Provider</div>
+                <div class="input"><input type="text" name="fname" id="keyProvider" value="{{keyProvider::input}}"></div>
+              </div>
+              <div class="cell">
+                <div class="name">Select BP & Network</div>
+                <div class="input"><blox-connect selector eos="{{eos}}" key-provider="[[keyProvider]]"></blox-connect></div>
               </div>
               <div class="cell">
                 <div class="name"></div>
-                <div class="input"><input type="submit" class="yellow-button" value="Generate Account"></div>
+                <div class="input"><input type="submit" class="yellow-button" value="Generate Account" on-click="_createAccount"></div>
               </div>
             </template>
-
+            payeoslaunch
           </div>
         </div>
         </div>
@@ -109,7 +116,7 @@ class EosCreate extends PolymerElement {
 
 
   _createKeyPairs(){
-    const name  = this.shadowRoot.querySelector('#name').value
+    const name  = this.shadowRoot.querySelector('#newName').value
     if (name.length === 12) {
       this.nameHelpText = "";
       this.showKeypairs = true;
@@ -137,9 +144,29 @@ class EosCreate extends PolymerElement {
     this.$.paper.makeTwo(publicKey1, privateKey1, publicKey2, privateKey2)
   }
 
+_keyProvider(){
+  const enteredKeyProvider = this.shadowRoot.querySelector('#keyProvider').value
+  if (enteredKeyProvider.length === 51){
+    this.keyProvider = enteredKeyProvider;
+  }
+}
+
+_createAccount(){
+  this.$.account.makeAccount(
+    this.eos, 
+    this.shadowRoot.querySelector('#ownerPublic').value, 
+    this.shadowRoot.querySelector('#activePublic').value , 
+    this.shadowRoot.querySelector('#fundingName').value, 
+    this.shadowRoot.querySelector('#newName').value
+  )
+}
+
   static get properties() {
     return {
-        showKeypairs: {
+      eos: {
+        type: Object,
+    },
+      showKeypairs: {
             type: Boolean,
             value: false,
         },
