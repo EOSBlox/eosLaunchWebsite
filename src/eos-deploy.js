@@ -1,6 +1,8 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import './shared-styles.js';
 import './components/the-header.js';
+import 'blox-restore';
+import 'blox-connect';
 
 class EosDeploy extends PolymerElement {
   static get template() {
@@ -26,33 +28,37 @@ class EosDeploy extends PolymerElement {
 
             <div class="cell">
               <div class="name">Contract WASM</div>
-              <div class="input"><input type="text" name="fname"></div>
+              <div class="input"><input type="text" name="fname" value="[[wasmfilename]]"></div>
             </div>
             <div class="cell">
               <div class="name"></div>
-              <div class="input"><input type="submit" class="button" value="Attach File"></div>
+              <div class="input"><blox-restore binary file-name="{{wasmfilename}}" accept=".wasm" error="{{error}}" restore-data="{{wasm}}" button-text="Attach WASM File"></blox-restore></div>
             </div>
             <div class="spacer"></div>
             <div class="cell">
               <div class="name">Contract ABI</div>
-              <div class="input"><input type="text" name="fname"></div>
+              <div class="input"><input type="text" name="fname" value="[[abifilename]]"></div>
             </div>
             <div class="cell">
               <div class="name"></div>
-              <div class="input"><input type="submit" class="button" value="Attach File"></div>
+              <div class="input"><blox-restore file-name="{{abifilename}}" accept=".abi" error="{{error}}" restore-data="{{abi}}" button-text="Attach ABI File"></blox-restore></div>
             </div>
             <div class="spacer"></div>
             <div class="cell">
-              <div class="name">Contract Account Name</div>
-              <div class="input"><input type="text" name="fname"></div>
+              <div class="name">Select BP & Network</div>
+              <div class="input"><blox-connect selector eos="{{eos}}" key-provider="[[keyProvider]]"></blox-connect></div>
             </div>
             <div class="cell">
-              <div class="name">Contract Private Key</div>
-              <div class="input"><input type="text" name="fname"></div>
+              <div class="name">Account Name</div>
+              <div class="input"><input type="text" name="fname" id="name"></div>
+            </div>
+            <div class="cell">
+              <div class="name">Key Provider</div>
+              <div class="input"><input type="text" name="fname" id="keyProvider" value="{{keyProvider::input}}"></div>
             </div>
             <div class="cell">
               <div class="name"></div>
-              <div class="input"><input type="submit" class="green-button" value="Deploy Contract"></div>
+              <div class="input"><input type="submit" class="green-button" value="Deploy Contract" on-click="_deploy"></div>
             </div>
 
           </div>
@@ -74,6 +80,34 @@ class EosDeploy extends PolymerElement {
 
     `;
   }
-}
 
-window.customElements.define('eos-deploy', EosDeploy);
+  static get properties() {
+    return {
+      eos: {
+        type: Object,
+      },
+      wasm: {
+            type: String,
+      },
+      abi: {
+          type: String,
+      },
+      keyProvider: {
+        type: String,
+    },
+    wasmfilename: {
+      type: String,
+  }
+    };
+  }
+
+  _deploy() {
+    const name = this.shadowRoot.querySelector('#name').value 
+    const abi = JSON.parse(this.abi);
+    const wasm = this.wasm;
+    console.log(wasm)
+    this.eos.setcode(name, 0, 0, wasm) 
+    this.eos.setabi(name, abi) 
+  }
+
+} window.customElements.define('eos-deploy', EosDeploy);

@@ -85,7 +85,6 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
       .button{
         background-image: linear-gradient(-180deg, #FEFFFF 0%, #F3F4F5 100%);
         border: 1px solid #D2D3D5;
-        
         border-radius: 4px;
         cursor: pointer;
         text-transform: uppercase;

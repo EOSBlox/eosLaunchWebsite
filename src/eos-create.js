@@ -6,6 +6,7 @@ import 'blox-paper';
 import 'blox-connect';
 import 'blox-account';
 
+
 class EosCreate extends PolymerElement {
   static get template() {
     return html`
@@ -26,69 +27,74 @@ class EosCreate extends PolymerElement {
         title="Create Account" 
         sub-title="Create an account for yourself or for a contract">
       </the-header>
-
+    
       <div class="center">
         <div class="left">
-        <div class="main-cell">
-          <div class="body">
+          <div class="main-cell">
+            <div class="body">
 
-            <div class="cell">
-              <div class="name">New Account Name</div>
-              <div class="input"><input type="text" name="name" id="newName"></div>
+              <div class="cell">
+                <div class="name">New Account Name</div>
+                <div class="input"><input type="text" name="name" id="newName" placeholder="[[nameHelpText]]"></div>
+              </div>
+              <template is="dom-if" if="[[!showKeypairs]]">
+                <div class="cell">
+                  <div class="name"></div>
+                  <div class="input"><input type="submit" class="button" value="Generate Keys" on-click="_createKeyPairs"></div>
+                </div>
+                <div class="spacer"></div>
+              </template>
+              <template is="dom-if" if="[[showKeypairs]]">
+                <div class="cell">
+                  <div class="name">Active Public Key</div>
+                  <div class="input"><input type="text" name="fname" id="activePublic"></div>
+                </div>
+                <div class="cell">
+                  <div class="name">Active Private Key</div>
+                  <div class="input"><input type="text" name="fname" id="activePrivate"></div>
+                </div>
+                <div class="cell">
+                  <div class="name">Owner Public Key</div>
+                  <div class="input"><input type="text" name="fname" id="ownerPublic"></div>
+                </div>
+                <div class="cell">
+                  <div class="name">Owner Private Key</div>
+                  <div class="input"><input type="text" name="fname" id="ownerPrivate"></div>
+                </div>
+                <div class="cell">
+                  <div class="name">Funding Account Name</div>
+                  <div class="input"><input type="text" name="fundingName" id="fundingName"></div>
+                </div>
+                <div class="cell">
+                  <div class="name">Key Provider</div>
+                  <div class="input"><input type="text" name="fname" id="keyProvider" value="{{keyProvider::input}}"></div>
+                </div>
+                <div class="cell">
+                  <div class="name">Select BP & Network</div>
+                  <div class="input"><blox-connect selector eos="{{eos}}" key-provider="[[keyProvider]]"></blox-connect></div>
+                </div>
+                <template is="dom-if" if="[[!complete]]">
+                  <div class="cell">
+                    <div class="name"></div>
+                    <div class="input"><input type="submit" class="yellow-button" value="Generate Account" on-click="_createAccount"></div>
+                  </div>
+                </template>
+                <div class="spacer"></div>
+                <template is="dom-if" if="[[complete]]">
+                  <div class="cell">
+                    <div class="name">Transaction ID</div>
+                    <div class="input"><input type="text" name="fname" id="transactionId" value="[[transactionId]]"></div>
+                  </div>
+                  <div class="cell">
+                    <div class="name"></div>
+                    <div class="input"><input type="submit" class="button" value="Print Paper Wallet" on-click="_printKeyPairs"></div>
+                  </div>
+                </template>
+              </template>
             </div>
-            <div class="cell">
-              <div class="name"></div>
-              <div class="input"><small>[[nameHelpText]]</small></div>
-            </div>
-            <div class="cell">
-              <div class="name"></div>
-              <div class="input"><input type="submit" class="button" value="Generate Keys" on-click="_createKeyPairs"></div>
-            </div>
-            <div class="spacer"></div>
-
-            <template is="dom-if" if="{{showKeypairs}}">
-              <div class="cell">
-                <div class="name">Active Public Key</div>
-                <div class="input"><input type="text" name="fname" id="activePublic"></div>
-              </div>
-              <div class="cell">
-                <div class="name">Owner Public Key</div>
-                <div class="input"><input type="text" name="fname" id="ownerPublic"></div>
-              </div>
-              <div class="cell">
-                <div class="name">Active Private Key</div>
-                <div class="input"><input type="text" name="fname" id="activePrivate"></div>
-              </div>
-              <div class="cell">
-                <div class="name">Owner Private Key</div>
-                <div class="input"><input type="text" name="fname" id="ownerPrivate"></div>
-              </div>
-              <div class="cell">
-                <div class="name"></div>
-                <div class="input"><input type="submit" class="button" value="Print Paper Wallet" on-click="_printKeyPairs"></div>
-              </div>
-              <div class="spacer"></div>
-              <div class="cell">
-                <div class="name">Funding Account Name</div>
-                <div class="input"><input type="text" name="fundingName" id="fundingName"></div>
-              </div>
-              <div class="cell">
-                <div class="name">Key Provider</div>
-                <div class="input"><input type="text" name="fname" id="keyProvider" value="{{keyProvider::input}}"></div>
-              </div>
-              <div class="cell">
-                <div class="name">Select BP & Network</div>
-                <div class="input"><blox-connect selector eos="{{eos}}" key-provider="[[keyProvider]]"></blox-connect></div>
-              </div>
-              <div class="cell">
-                <div class="name"></div>
-                <div class="input"><input type="submit" class="yellow-button" value="Generate Account" on-click="_createAccount"></div>
-              </div>
-            </template>
-            payeoslaunch
           </div>
         </div>
-        </div>
+
         <div class="right">
 
           <div class="side-cell">
@@ -144,37 +150,52 @@ class EosCreate extends PolymerElement {
     this.$.paper.makeTwo(publicKey1, privateKey1, publicKey2, privateKey2)
   }
 
-_keyProvider(){
-  const enteredKeyProvider = this.shadowRoot.querySelector('#keyProvider').value
-  if (enteredKeyProvider.length === 51){
-    this.keyProvider = enteredKeyProvider;
+  _keyProvider(){
+    const enteredKeyProvider = this.shadowRoot.querySelector('#keyProvider').value
+    if (enteredKeyProvider.length === 51){
+      this.keyProvider = enteredKeyProvider;
+    }
   }
-}
 
-_createAccount(){
-  this.$.account.makeAccount(
-    this.eos, 
-    this.shadowRoot.querySelector('#ownerPublic').value, 
-    this.shadowRoot.querySelector('#activePublic').value , 
-    this.shadowRoot.querySelector('#fundingName').value, 
-    this.shadowRoot.querySelector('#newName').value
-  )
-}
+  _createAccount(){
+    this.$.account.makeAccount(
+      this.eos, 
+      this.shadowRoot.querySelector('#fundingName').value, 
+      this.shadowRoot.querySelector('#newName').value,
+      this.shadowRoot.querySelector('#ownerPublic').value, 
+      this.shadowRoot.querySelector('#activePublic').value, 
+    )
+    .then((response) => {
+      console.log(response)
+      this.complete = true;
+      this.transactionId = response;
+    })
+    .catch((error) => {
+      onsole.log(error)
+    })
+  }
 
   static get properties() {
     return {
       eos: {
         type: Object,
-    },
+      },
       showKeypairs: {
             type: Boolean,
             value: false,
-        },
-        nameHelpText: {
+      },
+      nameHelpText: {
           type: String,
           value: 'Account names must be exactly 12 charectors long.',
       },
+      transactionId: {
+        type: String,
+      },
+      complete: {
+        type: Boolean,
+        value: false
+      },
     };
-}
+  }
 
 } window.customElements.define('eos-create', EosCreate);

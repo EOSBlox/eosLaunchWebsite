@@ -29,7 +29,9 @@
     "blox-account": "^1.0.0",
     "blox-connect": "^1.0.3",
     "blox-keypair": "^1.0.0",
-    "blox-paper": "^1.0.3"
+    "blox-paper": "^1.0.3",
+    "blox-restore": "^1.0.0",
+    "create-account-check": "^1.0.3"
   },
   "devDependencies": {
     "polymer-cli": "^1.7.1",
