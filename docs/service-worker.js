@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["index.html","7b899a980143f86ca45df12cb18fd8df"],["manifest.json","1845171d3c4fe9ebe6a48852f4347b34"],["src/eos-call.js","7a20eef64cbb7bf59567d4e3ab321636"],["src/eos-create.js","188e90be528d331233a3e2c0276d1395"],["src/eos-deploy.js","c6ec76c53b45dcc39acb782b811b1cbe"],["src/eos-home.js","c71db57674e01bca47f81f9719ce9d15"],["src/eos-launch.js","552107e8c9033898bebabb9bb4169491"],["src/my-view404.js","3357f8a06632c4f60c296c53ca72f559"]];
+var precacheConfig = [["index.html","7b899a980143f86ca45df12cb18fd8df"],["manifest.json","1845171d3c4fe9ebe6a48852f4347b34"],["src/eos-call.js","7a20eef64cbb7bf59567d4e3ab321636"],["src/eos-create.js","188e90be528d331233a3e2c0276d1395"],["src/eos-deploy.js","859f946ab30fa1e1aa60f2877aa5ed7f"],["src/eos-home.js","c71db57674e01bca47f81f9719ce9d15"],["src/eos-launch.js","552107e8c9033898bebabb9bb4169491"],["src/my-view404.js","3357f8a06632c4f60c296c53ca72f559"]];
 var cacheName = 'sw-precache-v3--' + (self.registration ? self.registration.scope : '');
 
 

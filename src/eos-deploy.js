@@ -97,7 +97,7 @@ class EosDeploy extends PolymerElement {
     },
     wasmfilename: {
       type: String,
-  }
+    }
     };
   }
 
@@ -105,9 +105,14 @@ class EosDeploy extends PolymerElement {
     const name = this.shadowRoot.querySelector('#name').value 
     const abi = JSON.parse(this.abi);
     const wasm = this.wasm;
+    console.log('------------WASM JUST BEFORE SENDING')
     console.log(wasm)
-    this.eos.setcode(name, 0, 0, wasm) 
-    this.eos.setabi(name, abi) 
+    this.eos.setcode()
+    Promise.all([this.eos.setcode(name, 0, 0, wasm), this.eos.setabi(name, abi)])
+    .then(function(values) {
+      console.log(values[0]);
+      console.log(values[1]);
+    });
   }
 
 } window.customElements.define('eos-deploy', EosDeploy);
