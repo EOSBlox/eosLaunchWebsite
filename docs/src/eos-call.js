@@ -19,12 +19,20 @@ define(["./eos-launch.js"],function(_eosLaunch){"use strict";class EosCall exten
           <div class="body">
 
             <div class="cell">
-              <div class="name">Contract Address</div>
-              <div class="input"><input type="text" name="fname"></div>
+              <div class="name">Contract Account Name</div>
+              <div class="input"><blox-connect selector verbose eos="{{eos}}" key-provider="[[keyProvider]]"></blox-connect></div>
+            </div>
+            <div class="cell">
+              <div class="name">Key Provider</div>
+              <div class="input"><input type="text" name="fname" id="keyProvider" value="{{keyProvider::input}}"></div>
+            </div>
+            <div class="cell">
+              <div class="name">Contract Account Name</div>
+              <div class="input"><input type="text" name="fname" id="accountName"></div>
             </div>
             <div class="cell">
               <div class="name"></div>
-              <div class="input"><input type="submit" class="button" value="Fetch Contract"></div>
+              <div class="input"><input type="submit" class="button" on-click="_play"></div>
             </div>
           </div>
         </div>
@@ -43,4 +51,4 @@ define(["./eos-launch.js"],function(_eosLaunch){"use strict";class EosCall exten
         </div>
       </div>
 
-    `}}window.customElements.define("eos-call",EosCall)});
+    `}static get properties(){return{eos:{type:Object}}}_newGame(){const contract=this.shadowRoot.querySelector("#accountName").value,player1Acc=this.shadowRoot.querySelector("#accountName").value,player2Acc=this.shadowRoot.querySelector("#accountName").value;this.eos.transaction({actions:[{account:contract,name:"newgame",authorization:[{actor:player1Acc,permission:"active"},{actor:player2Acc,permission:"active"}],data:{player1:player1Acc,player2:player2Acc}}]}).then(response=>{console.log(response)})}_play(){const contract=this.shadowRoot.querySelector("#accountName").value,player1Acc=this.shadowRoot.querySelector("#accountName").value,player2Acc=this.shadowRoot.querySelector("#accountName").value;this.eos.transaction({actions:[{account:contract,name:"play",authorization:[{actor:player1Acc,permission:"active"},{actor:player2Acc,permission:"active"}],data:{player1:player1Acc,player2:player2Acc,row:1,col:1}}]}).then(response=>{console.log(response)})}}window.customElements.define("eos-call",EosCall)});

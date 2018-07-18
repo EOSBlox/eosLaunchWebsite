@@ -5,6 +5,7 @@ import 'blox-keypair';
 import 'blox-paper';
 import 'blox-connect';
 import 'blox-account';
+import 'blox-clipboard';
 
 
 class EosCreate extends PolymerElement {
@@ -20,6 +21,7 @@ class EosCreate extends PolymerElement {
       <blox-keypair id="keypair"></blox-keypair>
       <blox-paper id="paper"></blox-paper>
       <blox-account id="account"></blox-account>
+      <blox-clipboard id="clipboard" text="[[clipboard]]"></blox-clipboard>
 
       <the-header 
         class="the-header" 
@@ -71,7 +73,7 @@ class EosCreate extends PolymerElement {
                 </div>
                 <div class="cell">
                   <div class="name">Select BP & Network</div>
-                  <div class="input"><blox-connect selector eos="{{eos}}" key-provider="[[keyProvider]]"></blox-connect></div>
+                  <div class="input"><blox-connect selector eos="{{eos}}" key-provider="[[keyProvider]]" selected="{{network}}"></blox-connect></div>
                 </div>
                 <template is="dom-if" if="[[!complete]]">
                   <div class="cell">
@@ -80,7 +82,7 @@ class EosCreate extends PolymerElement {
                   </div>
                 </template>
                 <div class="spacer"></div>
-                <template is="dom-if" if="[[complete]]">
+                <!-- <template is="dom-if" if="[[complete]]"> -->
                   <div class="cell">
                     <div class="name">Transaction ID</div>
                     <div class="input"><input type="text" name="fname" id="transactionId" value="[[transactionId]]"></div>
@@ -89,7 +91,11 @@ class EosCreate extends PolymerElement {
                     <div class="name"></div>
                     <div class="input"><input type="submit" class="button" value="Print Paper Wallet" on-click="_printKeyPairs"></div>
                   </div>
-                </template>
+                  <div class="cell">
+                    <div class="name"></div>
+                    <div class="input"><input type="submit" class="button" value="Copy To Clipboard" on-click="_copy"></div>
+                  </div>
+                <!-- </template> -->
               </template>
             </div>
           </div>
@@ -116,10 +122,30 @@ class EosCreate extends PolymerElement {
 
         </div>
       </div>
-
     `;
   }
 
+  _copy() {
+    const name = this.shadowRoot.querySelector('#newName').value;
+    const activePublic = this.shadowRoot.querySelector('#activePublic').value;
+    const activePrivate = this.shadowRoot.querySelector('#activePrivate').value;
+    const ownerPublic = this.shadowRoot.querySelector('#ownerPublic').value;
+    const ownerPrivate = this.shadowRoot.querySelector('#ownerPrivate').value;
+    const transactionID = this.transactionId;
+    const network = this.network;
+    this.clipboard = `
+      Account Name: ${name} 
+
+      Active Public Key: ${activePublic} 
+      Active Private Key: ${activePrivate} 
+
+      Owner Public Key: ${ownerPublic} 
+      Owner Private Key: ${ownerPrivate}
+
+      Network: ${network}
+      Transaction ID: ${transactionID}
+      `
+  }
 
   _createKeyPairs(){
     const name  = this.shadowRoot.querySelector('#newName').value
@@ -171,7 +197,8 @@ class EosCreate extends PolymerElement {
       this.transactionId = response;
     })
     .catch((error) => {
-      onsole.log(error)
+      console.log('error....')
+      console.log(error)
     })
   }
 
@@ -195,6 +222,12 @@ class EosCreate extends PolymerElement {
         type: Boolean,
         value: false
       },
+      clipboard: {
+        type: String
+      },
+      network: {
+        type: String
+      }
     };
   }
 

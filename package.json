@@ -27,6 +27,7 @@
     "@polymer/polymer": "^3.0.0",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "blox-account": "^1.0.0",
+    "blox-clipboard": "^1.0.1",
     "blox-connect": "^1.0.3",
     "blox-keypair": "^1.0.0",
     "blox-paper": "^1.0.3",

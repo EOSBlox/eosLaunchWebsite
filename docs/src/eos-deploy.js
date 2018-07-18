@@ -111,4 +111,4 @@ define(["./eos-launch.js"],function(_eosLaunch){"use strict";class BloxRestore e
         </div>
       </div>
 
-    `}static get properties(){return{eos:{type:Object},wasm:{type:String},abi:{type:String},keyProvider:{type:String},wasmfilename:{type:String}}}_deploy(){const name=this.shadowRoot.querySelector("#name").value,abi=JSON.parse(this.abi),wasm=this.wasm;console.log("------------WASM JUST BEFORE SENDING");console.log(wasm);Promise.all([this.eos.setcode(name,0,0,wasm),this.eos.setabi(name,abi)]).then(function(values){console.log(values[0]);console.log(values[1])})}}window.customElements.define("eos-deploy",EosDeploy)});
+    `}static get properties(){return{eos:{type:Object},wasm:{type:String},abi:{type:String},keyProvider:{type:String},wasmfilename:{type:String}}}_deploy(){const name=this.shadowRoot.querySelector("#name").value,abi=JSON.parse(this.abi),wasm=this.wasm;console.log("------------WASM JUST BEFORE SENDING");console.log(wasm);this.eos.setcode();Promise.all([this.eos.setcode(name,0,0,wasm),this.eos.setabi(name,abi)]).then(function(values){console.log(values[0]);console.log(values[1])})}}window.customElements.define("eos-deploy",EosDeploy)});
