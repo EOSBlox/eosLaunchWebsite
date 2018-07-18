@@ -44,6 +44,7 @@ define(["exports","meta","require"],function(_exports,meta,_require3){"use stric
       </style>
       <template is="dom-if" if="{{selector}}">
         <select on-change="_selected" id="select" class="selector">
+          <option value="">Please Select a Network...</option>
           <option value="eosNewYork-mainNet">EOS New York - Main Net</option>
           <option value="franceos-testNet">Franceos - Test Net</option>
         </select>

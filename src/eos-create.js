@@ -49,19 +49,24 @@ class EosCreate extends PolymerElement {
               <template is="dom-if" if="[[showKeypairs]]">
                 <div class="cell">
                   <div class="name">Active Public Key</div>
-                  <div class="input"><input type="text" name="fname" id="activePublic"></div>
+                  <div class="input"><input type="text" name="fname" id="activePublic" readonly></div>
                 </div>
                 <div class="cell">
                   <div class="name">Active Private Key</div>
-                  <div class="input"><input type="text" name="fname" id="activePrivate"></div>
+                  <div class="input"><input type="text" name="fname" id="activePrivate" readonly></div>
                 </div>
                 <div class="cell">
                   <div class="name">Owner Public Key</div>
-                  <div class="input"><input type="text" name="fname" id="ownerPublic"></div>
+                  <div class="input"><input type="text" name="fname" id="ownerPublic" readonly></div>
                 </div>
                 <div class="cell">
                   <div class="name">Owner Private Key</div>
-                  <div class="input"><input type="text" name="fname" id="ownerPrivate"></div>
+                  <div class="input"><input type="text" name="fname" id="ownerPrivate" readonly></div>
+                </div>
+                <div class="spacer"></div>
+                <div class="cell">
+                  <div class="name">Select BP & Network</div>
+                  <div class="input"><blox-connect selector eos="{{eos}}" key-provider="[[keyProvider]]" selected="{{network}}"></blox-connect></div>
                 </div>
                 <div class="cell">
                   <div class="name">Funding Account Name</div>
@@ -71,10 +76,7 @@ class EosCreate extends PolymerElement {
                   <div class="name">Key Provider</div>
                   <div class="input"><input type="text" name="fname" id="keyProvider" value="{{keyProvider::input}}"></div>
                 </div>
-                <div class="cell">
-                  <div class="name">Select BP & Network</div>
-                  <div class="input"><blox-connect selector eos="{{eos}}" key-provider="[[keyProvider]]" selected="{{network}}"></blox-connect></div>
-                </div>
+
                 <template is="dom-if" if="[[!complete]]">
                   <div class="cell">
                     <div class="name"></div>
